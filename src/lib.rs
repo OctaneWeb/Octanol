@@ -88,4 +88,43 @@
 //! }
 //! ```
 //!
+//! # Differences from HTML
+//!
+//! HTML have weird combination of verboseness and ambiguity. While
+//! Octanol adds placeholder to HTML, it also adds small flavor to HTML for
+//! small improvement while keeping it familiar.
+//!
+//! ## C++ style comments
+//!
+//! As explained earlier, Octanol template can contain C++ style comments and
+//! it will be treated normally like a comment. Additionally, you can use HTML
+//! style comments.
+//!
+//! C++ style comments are more concise and generally easier to type.
+//! Additionally, Rust also uses this style of comment, and hence the decision
+//! to use this kind of style.
+//!
+//! ## Optional boilerplate
+//!
+//! When omitted, these boilerplate will be automatically added upon generation.
+//!
+//! - `<!DOCTYPE html>`
+//! - `<html></html>`
+//! - `<meta charset="utf-8">`
+//!
+//! These are already optional in HTML. However, such documents without those
+//! boilerplate aren't guaranteed to be rendered properly.
+//!
+//! ## Always UTF-8
+//!
+//! This is more of an opinionated flavor. Octanol always assume it is
+//! encoded in UTF-8. Explicitly setting `meta charset` to anything other than
+//! UTF-8 will result in error.
+//!
+//! This decision is made to match Rust's UTF-8 encoding to strings.
+//!
+//! ## `<head>` and `<body>` is required
+//!
+//! Yeah thats right. TODO more proper explanation.
+//!
 mod lexer;
