@@ -134,4 +134,5 @@
 //!
 //! Yeah thats right. TODO more proper explanation.
 //!
-mod lexer;
+pub mod engine;
+pub mod lexer;
