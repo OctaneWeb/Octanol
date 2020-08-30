@@ -135,4 +135,4 @@
 //! Yeah thats right. TODO more proper explanation.
 //!
 pub mod engine;
-pub mod lexer;
+pub mod parser;

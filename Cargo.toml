@@ -1,5 +1,5 @@
 [package]
-name = "Octanol"
+name = "octanol"
 version = "0.1.0"
 authors = ["Daksh14 <somilsharma627@gmail.com>"]
 edition = "2018"

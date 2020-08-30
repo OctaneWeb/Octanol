@@ -1,4 +1,4 @@
-use crate::lexer::Lexer;
+use crate::parser::{lexer::Lexer, Parser};
 use std::default::Default;
 use std::error;
 use std::fmt::{Display, Error, Formatter};
@@ -13,8 +13,9 @@ pub struct Octanol {
     serve_folders: Vec<PathBuf>,
     default_page: Option<PathBuf>,
 }
+
 #[derive(Debug, Clone)]
-struct Engine {
+pub struct Engine {
     octanol: Octanol,
 }
 
@@ -28,17 +29,22 @@ impl Engine {
         Engine { octanol }
     }
     pub fn run(self) -> Result<(), Box<dyn error::Error>> {
+        let test_folder = &self.serve_folders[0];
         let mut default_page = PathBuf::new();
         if self.default_page.is_some() {
             default_page = self.default_page.as_ref().unwrap().to_path_buf();
         } else {
-            default_page = PathBuf::from("index.octml");
+            default_page = PathBuf::from(test_folder);
+            default_page.push("index.octml");
         }
+        println!("{:?}", default_page);
         let file = File::open(default_page)?;
+        println!("{:?}", file);
         let mut buf_reader = BufReader::new(file);
         let mut contents = Vec::new();
-        buf_reader.read(&mut contents)?;
-        Lexer::lex(contents);
+        buf_reader.read_to_end(&mut contents)?;
+        let lexical = Lexer::lex(contents);
+        let parsed = Parser::parse(lexical);
         Ok(())
     }
 }
